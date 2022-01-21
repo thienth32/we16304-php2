@@ -81,6 +81,7 @@ class BaseModel
 		$stmt = $this->getConnect()->prepare($this->queryBuilder);
 		return $stmt->execute();
 	}
+	
 	public static function all(){
 		$model = new static();
         $query = "select * from $model->tableName";

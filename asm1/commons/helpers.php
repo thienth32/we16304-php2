@@ -1,5 +1,5 @@
 <?php
 
-const BASE_URL = "http://localhost/we16303-php2/asm1/";
+const BASE_URL = "http://localhost/we16304-php2/asm1/";
 
 ?>
