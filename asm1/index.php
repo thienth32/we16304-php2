@@ -12,6 +12,8 @@ switch ($url) {
         break;
     case 'dashboard':
         break;
+
+    // http://localhost/we16304-php2/asm1/mon-hoc
     case 'mon-hoc':
         $ctr = new SubjectController();
         $ctr->index();
@@ -25,8 +27,12 @@ switch ($url) {
         $ctr->saveAdd();
         break;
     case 'mon-hoc/cap-nhat':
+        $ctr = new SubjectController();
+        $ctr->editForm();
         break;
     case 'mon-hoc/luu-cap-nhat':
+        $ctr = new SubjectController();
+        $ctr->saveEdit();
         break;
     case 'mon-hoc/xoa':
         $ctr = new SubjectController();
