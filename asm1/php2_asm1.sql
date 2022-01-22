@@ -11,7 +11,7 @@
  Target Server Version : 80025
  File Encoding         : 65001
 
- Date: 21/01/2022 14:47:04
+ Date: 22/01/2022 14:18:26
 */
 
 SET NAMES utf8mb4;
@@ -100,7 +100,9 @@ COMMIT;
 DROP TABLE IF EXISTS `student_quiz_detail`;
 CREATE TABLE `student_quiz_detail` (
   `student_quiz_id` int NOT NULL,
-  `answer_id` int DEFAULT NULL
+  `question_id` int NOT NULL,
+  `answer_id` int NOT NULL,
+  PRIMARY KEY (`student_quiz_id`,`question_id`,`answer_id`) USING BTREE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8_unicode_ci;
 
 -- ----------------------------
@@ -138,14 +140,16 @@ CREATE TABLE `subjects` (
   `name` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `author_id` int DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb3 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb3 COLLATE=utf8_unicode_ci;
 
 -- ----------------------------
 -- Records of subjects
 -- ----------------------------
 BEGIN;
 INSERT INTO `subjects` VALUES (1, 'Tin học cơ sở\n', 1);
-INSERT INTO `subjects` VALUES (2, 'Nhập môn lập trình - FA19\n', 1);
+INSERT INTO `subjects` VALUES (3, 'Lập trình PHP2', NULL);
+INSERT INTO `subjects` VALUES (5, 'Lập trình C++', NULL);
+INSERT INTO `subjects` VALUES (6, 'Lập trình Game 2D - nâng cao', NULL);
 COMMIT;
 
 -- ----------------------------
@@ -153,19 +157,20 @@ COMMIT;
 -- ----------------------------
 DROP TABLE IF EXISTS `users`;
 CREATE TABLE `users` (
-  `id` int NOT NULL,
+  `id` int NOT NULL AUTO_INCREMENT,
   `name` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `email` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `password` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `avatar` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `role_id` int DEFAULT NULL,
+  `role_id` int DEFAULT '2',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb3 COLLATE=utf8_unicode_ci;
 
 -- ----------------------------
 -- Records of users
 -- ----------------------------
 BEGIN;
+INSERT INTO `users` VALUES (1, 'trần hữu thiện', 'thienth@fpt.edu.vn', '$2y$10$ogeclBPOumIBjkRF17hUmuYTx/usbE71s5b6yfOy74KvLaLUdFq4u', NULL, 1);
 COMMIT;
 
 SET FOREIGN_KEY_CHECKS = 1;
