@@ -2,8 +2,8 @@
 require_once './commons/helpers.php';
 require_once './vendor/autoload.php';
 
+use App\Controllers\QuizController;
 use App\Controllers\SubjectController;
-
 
 $url = isset($_GET['url']) ? $_GET['url'] : "/";
 // $url mong muốn của người gửi request
@@ -12,8 +12,6 @@ switch ($url) {
         break;
     case 'dashboard':
         break;
-
-    // http://localhost/we16304-php2/asm1/mon-hoc
     case 'mon-hoc':
         $ctr = new SubjectController();
         $ctr->index();
@@ -41,12 +39,20 @@ switch ($url) {
     case 'mon-hoc/chi-tiet':
         break;
     case 'quiz':
+        $ctr = new QuizController();
+        $ctr->index();
         break;
     case 'quiz/tao-moi':
+        $ctr = new QuizController();
+        $ctr->addForm();
         break;
-    case 'quiz/luu-tao-moi':
+    case 'quiz/save-add':
+        $ctr = new QuizController();
+        $ctr->saveAdd();
         break;
     case 'quiz/cap-nhat':
+        $ctr = new QuizController();
+        $ctr->editForm();
         break;
     case 'quiz/luu-cap-nhat':
         break;
