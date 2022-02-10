@@ -1,4 +1,5 @@
-<form action="<?= BASE_URL . 'mon-hoc/luu-tao-moi'?>" method="post">
+<p><?php global $router; echo $router->route('subject.index')?></p>
+<form action="" method="post">
     <div>
         <label for="">Tên danh mục</label>
         <input type="text" name="name">
