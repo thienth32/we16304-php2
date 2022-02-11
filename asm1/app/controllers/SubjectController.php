@@ -1,21 +1,26 @@
 <?php
 namespace App\Controllers;
 
+use App\Models\Quiz;
 use App\Models\Subject;
 
 class SubjectController{
-    public function index(){
-        $subjects = Subject::all();
-
-        include_once "./app/views/mon-hoc/index.php";
+    public function index($id = null){
+        if(empty($id)){
+            $subjects = Subject::all();
+            include_once "./app/views/mon-hoc/index.php";
+        }else{
+            $subject = Subject::where(['id', '=', $id])->first();
+            $quizs = Quiz::where(['subject_id', '=', $id])->get();
+            include_once "./app/views/mon-hoc/detail.php";
+        }        
     }
 
     public function addForm(){
         include_once "./app/views/mon-hoc/add-form.php";
     }
 
-    public function editForm(){
-        $id = $_GET['id'];
+    public function editForm($id){
         $model = Subject::where(['id', '=', $id])->first();
         if(!$model){
             header('location: ' . BASE_URL . 'mon-hoc');

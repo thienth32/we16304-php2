@@ -1,4 +1,5 @@
 <?php
+var_dump(1);die;
 require_once './commons/helpers.php';
 require_once './vendor/autoload.php';
 
@@ -11,9 +12,13 @@ $router = new RouteCollector();
 
 // định nghĩa ra url mới
 $router->group(['prefix' => 'mon-hoc'], function($router){
-    $router->get(['/', 'subject.index'], [SubjectController::class, 'index']);
+    
     $router->get('tao-moi', [SubjectController::class, 'addForm']);
     $router->post('tao-moi', [SubjectController::class, 'saveAdd']);
+    $router->get('cap-nhat/{id}', [SubjectController::class, 'editForm']);
+    $router->post('cap-nhat/{id}', [SubjectController::class, 'saveEdit']);
+    
+    $router->get(['/{id}?', 'subject.index'], [SubjectController::class, 'index']);
 });
 
 
