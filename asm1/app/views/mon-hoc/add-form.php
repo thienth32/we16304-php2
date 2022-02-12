@@ -1,4 +1,4 @@
-<p><?php global $router; echo $router->route('subject.index')?></p>
+
 <form action="" method="post">
     <div>
         <label for="">Tên danh mục</label>

@@ -1,26 +1,40 @@
 <?php
-var_dump(1);die;
 require_once './commons/helpers.php';
 require_once './vendor/autoload.php';
 
 $url = isset($_GET['url']) ? $_GET['url'] : "/";
 
+use App\Controllers\LoginController;
 use App\Controllers\SubjectController;
 use Phroute\Phroute\RouteCollector;
 
 $router = new RouteCollector();
+
+// filter check login
+$router->filter('auth', function(){
+    if(!isset($_SESSION['auth']) || empty($_SESSION['auth'])){
+        header('location: ' . BASE_URL . 'login');
+        die;
+    }
+});
+
 
 // định nghĩa ra url mới
 $router->group(['prefix' => 'mon-hoc'], function($router){
     
     $router->get('tao-moi', [SubjectController::class, 'addForm']);
     $router->post('tao-moi', [SubjectController::class, 'saveAdd']);
-    $router->get('cap-nhat/{id}', [SubjectController::class, 'editForm']);
+    $router->get('cap-nhat/{id}', [SubjectController::class, 'editForm'], ['before' => 'auth']);
     $router->post('cap-nhat/{id}', [SubjectController::class, 'saveEdit']);
     
     $router->get(['/{id}?', 'subject.index'], [SubjectController::class, 'index']);
 });
 
+$router->get('login', [LoginController::class, 'loginForm']);
+$router->get('logout', function(){
+    unset($_SESSION['auth']);
+    return "done";
+});
 
 
 $dispatcher = new Phroute\Phroute\Dispatcher($router->getData());
