@@ -1,6 +1,7 @@
 <?php
 namespace App\Models;
-class Quiz extends BaseModel{
-    protected $tableName = 'quizs';
+use Illuminate\Database\Eloquent\Model;
+class Quiz extends Model{
+    protected $table = 'quizs';
 }
 ?>

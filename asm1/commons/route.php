@@ -1,4 +1,6 @@
 <?php
+
+use App\Controllers\HomeController;
 use App\Controllers\LoginController;
 use App\Controllers\SubjectController;
 use Phroute\Phroute\RouteCollector;
@@ -13,6 +15,8 @@ function applyRoute($url){
             die;
         }
     });
+
+    $router->get('/', [HomeController::class, 'index']);
 
     // định nghĩa ra url mới
     $router->group(['prefix' => 'mon-hoc'], function($router){

@@ -1,10 +1,11 @@
 <?php
 namespace App\Models;
-class Question extends BaseModel{
-    protected $tableName = 'questions';
+use Illuminate\Database\Eloquent\Model;
+class Question extends Model{
+    protected $table = 'questions';
 
     public function getAnswers(){
-        return Answer::where(['question_id', '=', $this->id])->get();
+        return Answer::where('question_id', '=', $this->id)->get();
     }
 }
 ?>

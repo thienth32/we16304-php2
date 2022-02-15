@@ -1,6 +1,7 @@
 <?php
 namespace App\Models;
-class User extends BaseModel{
-    protected $tableName = 'users';
+use Illuminate\Database\Eloquent\Model;
+class User extends Model{
+    protected $table = 'users';
 }
 ?>
