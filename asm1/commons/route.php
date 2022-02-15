@@ -32,6 +32,7 @@ function applyRoute($url){
     });
 
     $router->get('login', [LoginController::class, 'loginForm']);
+    $router->post('login', [LoginController::class, 'postLogin']);
     $router->get('logout', function(){
         unset($_SESSION['auth']);
         return "done";
