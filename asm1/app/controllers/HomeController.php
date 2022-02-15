@@ -3,7 +3,7 @@ namespace App\Controllers;
 
 use App\Models\Subject;
 
-class HomeController extends BaseController{
+class HomeController{
     
     public function index(){
         $order = isset($_GET['order']) ? $_GET['order'] : 1;
@@ -16,8 +16,11 @@ class HomeController extends BaseController{
         }else{
             $subjects = $query->orderByDesc('name')->get();   
         }
+        return view('home.homepage', [
+            'dsMonhoc' => $subjects
+        ]);
         
-        $this->render('home.homepage', compact('subjects'));
+        // $this->render('home.homepage', compact('subjects'));
     }
 }
 ?>

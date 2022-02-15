@@ -1,6 +1,4 @@
-@extends('layouts.client.main')
-@section('title', 'Trang chủ')
-@section('content')
+
 <form action="" method="get">
     <div class="row">
         <div class="col-6">
@@ -21,7 +19,7 @@
     </div>
 </form>
 <div class="row">
-    @foreach($subjects as $sub)
+    @foreach($dsMonhoc as $sub)
     <div class="col-3 mt-3" >
         <div class="card" style="width: 100%;">
             <img src="..." class="card-img-top" alt="...">
@@ -36,4 +34,3 @@
     </div>
     @endforeach
 </div>
-@endsection

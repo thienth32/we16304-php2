@@ -5,15 +5,9 @@ use App\Models\Quiz;
 use App\Models\Subject;
 
 class SubjectController{
-    public function index($id = null){
-        if(empty($id)){
-            $subjects = Subject::all();
-            include_once "./app/views/mon-hoc/index.php";
-        }else{
-            $subject = Subject::where(['id', '=', $id])->first();
-            $quizs = Quiz::where(['subject_id', '=', $id])->get();
-            include_once "./app/views/mon-hoc/detail.php";
-        }        
+    public function index(){
+        $subjects = Subject::all();
+        return view('admin.mon-hoc.index', ['subjects' => $subjects]);       
     }
 
     public function addForm(){

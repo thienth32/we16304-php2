@@ -20,9 +20,7 @@ function applyRoute($url){
 
     // định nghĩa ra url mới
     $router->group(['prefix' => 'mon-hoc', 'before' => 'auth'], function($router){
-        $router->get('/', function(){
-            return "danh sách môn học";
-        });
+        $router->get('/', [SubjectController::class, 'index']);
         $router->get('tao-moi', [SubjectController::class, 'addForm']);
         $router->post('tao-moi', [SubjectController::class, 'saveAdd']);
         $router->get('cap-nhat/{id}', [SubjectController::class, 'editForm']);
