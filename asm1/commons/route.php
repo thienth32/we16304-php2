@@ -19,13 +19,13 @@ function applyRoute($url){
     $router->get('/', [HomeController::class, 'index']);
 
     // định nghĩa ra url mới
-    $router->group(['prefix' => 'mon-hoc'], function($router){
+    $router->group(['prefix' => 'mon-hoc', 'before' => 'auth'], function($router){
         $router->get('/', function(){
             return "danh sách môn học";
         });
         $router->get('tao-moi', [SubjectController::class, 'addForm']);
         $router->post('tao-moi', [SubjectController::class, 'saveAdd']);
-        $router->get('cap-nhat/{id}', [SubjectController::class, 'editForm'], ['before' => 'auth']);
+        $router->get('cap-nhat/{id}', [SubjectController::class, 'editForm']);
         $router->post('cap-nhat/{id}', [SubjectController::class, 'saveEdit']);
         
         $router->get(['/{id}?', 'subject.index'], [SubjectController::class, 'index']);
