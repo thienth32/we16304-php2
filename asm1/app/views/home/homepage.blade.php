@@ -1,4 +1,7 @@
-
+@extends('layouts.client.main')
+@section('title', 'Trang chủ')
+@section('content')
+    
 <form action="" method="get">
     <div class="row">
         <div class="col-6">
@@ -34,3 +37,4 @@
     </div>
     @endforeach
 </div>
+@endsection
