@@ -8,6 +8,10 @@ use Phroute\Phroute\RouteCollector;
 function applyRoute($url){
     $router = new RouteCollector();
 
+    $router->get('test-layout', function(){
+        return view('layouts.main');
+    });
+
     // filter check login
     $router->filter('auth', function(){
         if(!isset($_SESSION['auth']) || empty($_SESSION['auth'])){
