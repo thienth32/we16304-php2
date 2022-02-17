@@ -2,6 +2,7 @@
 
 use App\Controllers\HomeController;
 use App\Controllers\LoginController;
+use App\Controllers\QuizController;
 use App\Controllers\SubjectController;
 use Phroute\Phroute\RouteCollector;
 
@@ -31,6 +32,11 @@ function applyRoute($url){
         $router->post('cap-nhat/{id}', [SubjectController::class, 'saveEdit']);
         
         $router->get(['/{id}?', 'subject.index'], [SubjectController::class, 'index']);
+    });
+
+    $router->group(['prefix' => 'quizs', 'before' => 'auth'], function($router){
+        $router->get('add/{subjectId}?', [QuizController::class, 'addForm']);
+        $router->get('/{subjectId}?', [QuizController::class, 'index']);
     });
 
     $router->get('login', [LoginController::class, 'loginForm']);

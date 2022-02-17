@@ -6,24 +6,26 @@ use App\Models\Quiz;
 use App\Models\Subject;
 
 class QuizController{
-    public function index(){
-        // 1. lấy id của môn học
-        $sid = $_GET['subjectId'];
-        $subject = Subject::where(['id', '=', $sid])->first();
-        if(empty($subject)){
-            header("location: " . BASE_URL);
-            die;
+    public function index($subjectId = 0){
+        if($subjectId > 0){
+            $quizs = Quiz::where('subject_id', $subjectId)->get();
+        }else{
+            $quizs = Quiz::all();
         }
 
-        // 2. lấy danh sách quiz của môn học đó ra
-        $subjectQuizs = Quiz::where(['subject_id', '=', $subject->id])->get();
-
-        include_once './app/views/quiz/index.php';
+        return view('quiz.index', [
+            'quizs' => $quizs,
+            'subject' => $subjectId > 0 ? Subject::find($subjectId) : null
+        ]);
     }
 
-    public function addForm(){
-        $subjectId = $_GET['subjectId'];
-        include_once './app/views/quiz/add-form.php';
+    public function addForm($subjectId = 0){
+        $subjects = Subject::all();
+
+        return view('quiz.add-form', [
+            'subjects' => $subjects,
+            'selectedSubjectId' => $subjectId
+        ]);
     }
 
     public function saveAdd()
